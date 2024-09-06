@@ -56,10 +56,10 @@ sequenceDiagram
 > 🧨 Before you click the "Assessment Complete" button on the Learning Platform, add your answers below for each question and make a commit. It is your option to request a face-to-face meeting with a coach for a vocabulary review.
 
 1. Should transient state be represented in a database diagram? Why, or why not?
-   > Your answer here
+   > Transient state should not be represented in a database diagram.  Transient state exists solely in memory and, as such, is not a part of the database.  Once the transient state data is written out to the database, it is implicitly a part of the diagram.
 2. In the **FoodTruck** module, you are **await**ing the invocataion of all of the component functions _(e.g. sales, veggie options, etc.)_. Why must you use the `await` keyword there? Explain what happens if you remove it.
-   > Your answer here
+   > The `await` keyword pauses the execution of the function until the data returned by the functions is resolved. Removing the `await` keyword would cause the return of incomplete data from the program.
 3. When the user is making choices by selecting radio buttons, explain how that data is retained so that the **Purchase Combo** button works correctly.
-   > Your answer here
+   > The data retained by user radio button selection is stored in memory until such time as it is either transferred to storage or erased (by page refresh or closing the browser).
 4. You used the `map()` array method in the self assessment _(at least, you should have since it is a learning objective)_. Explain why that function is helpful as a replacement for a `for..of` loop.
-   > Your answer here
+   > The `map()` array method is cleaner, easier to read.  It also allows use of the `find()`, `filter()` and `map()` methods. By default it returns a new array, unlike the `for..of` loop.

@@ -1,0 +1,37 @@
+
+---------------------------------------------------------------------------------
+Sequence Diagram:
+
+title House of Hummus
+
+participant FoodTruck
+participant Entrees
+participant SideDishes
+participant Vegetables
+participant TransientState
+participant OrderButton
+participant API
+participant Main
+
+
+
+FoodTruck->Entrees:Generate entree options
+FoodTruck<--Entrees:Here are some radio buttons
+
+FoodTruck->SideDishes:Generate side options
+FoodTruck<--SideDishes:Here are some radio buttons
+
+FoodTruck->Vegetables:Generate veggie options
+FoodTruck<--Vegetables:Here are some radio buttons
+
+FoodTruck->TransientState: Here are an entree, side and veg.
+
+OrderButton->TransientState: I'll take those options
+OrderButton->Main:Clear the radio buttons
+
+TransientState->API: Please store this as an order
+
+FoodTruck->API: How about those orders?
+FoodTruck<--API: Here's the order data.
+
+FoodTruck->Main: Here's some HTML. Send it to the DOM.

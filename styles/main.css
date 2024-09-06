@@ -28,7 +28,29 @@ ul {
     padding-inline-start: 0.75rem;
 }
 
-#purchase {
+.cards {
+    flex-basis: 300px;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: space-around;
+}
+
+.customerOrders{
+    border: 2px dashed lightblue;
+    border-radius: 5px;
+    padding: 20px;
+    width: 250px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 10px 5px 5px gray;
+    margin-bottom: 10px;
+}
+
+.button {
+    border: none;
+    text-align: center;
+    display: inline-block;
     margin: 1rem 0 2rem 2rem;
     padding: 0.5rem;
     background-color: rgb(111, 72, 227);
