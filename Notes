@@ -4,34 +4,70 @@ Sequence Diagram:
 
 title House of Hummus
 
+participant User
+participant DOM
+participant Main
 participant FoodTruck
 participant Entrees
 participant SideDishes
 participant Vegetables
+participant Sales
+participant API
 participant TransientState
 participant OrderButton
-participant API
-participant Main
 
-
+User->DOM: Let me see a web page.
+DOM->Main: Need some HTML
+Main->FoodTruck:How about some HTML
 
 FoodTruck->Entrees:Generate entree options
+Entrees->API: Need data
+API-->Entrees: Here's data
 FoodTruck<--Entrees:Here are some radio buttons
 
 FoodTruck->SideDishes:Generate side options
+SideDishes->API: Need data
+API-->SideDishes: Here's data
 FoodTruck<--SideDishes:Here are some radio buttons
 
 FoodTruck->Vegetables:Generate veggie options
+Vegetables->API: Need data
+API-->Vegetables: Here's data
 FoodTruck<--Vegetables:Here are some radio buttons
 
-FoodTruck->TransientState: Here are an entree, side and veg.
+FoodTruck->Sales: Gimme sales data
+Sales->API: Gimme sales data
+API-->Sales: Sales data
+Sales-->FoodTruck: Here's HTML of the sales data
 
-OrderButton->TransientState: I'll take those options
-OrderButton->Main:Clear the radio buttons
+FoodTruck-->Main: Here's some HTML
+Main-->DOM: Your HTML
+DOM-->User: Here's a web page
 
-TransientState->API: Please store this as an order
+User->DOM: Here are my choices
+DOM->Main: Here are choices
+Main->FoodTruck:Here are the choices
 
-FoodTruck->API: How about those orders?
-FoodTruck<--API: Here's the order data.
+FoodTruck->Entrees: Here's an entree choice
+Entrees->TransientState: Hold this entree.
 
-FoodTruck->Main: Here's some HTML. Send it to the DOM.
+FoodTruck->SideDishes: Here's a side dish choice
+SideDishes->TransientState: Hold this side dish
+
+FoodTruck->Vegetables: Here's a vegetable choice
+Vegetables->TransientState: Hold this vegetable
+
+User->DOM:I've pushed the button
+DOM->Main:Button pushed
+Main->TransientState: Button pushed
+TransientState->OrderButton: new order
+TransientState<-OrderButton: save the order
+TransientState->API:Hold this
+TransientState->Main:refresh the display
+
+Main->FoodTruck: How about some HTML
+
+note right of FoodTruck:FoodTruck, as above, imports from Entrees, SideDishes, Vegetables, and Sales to update the display.
+
+FoodTruck-->Main: Here's some HTML
+Main->DOM:refresh the display
