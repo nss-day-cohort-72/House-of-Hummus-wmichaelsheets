@@ -8,10 +8,10 @@ participant User
 participant DOM
 participant Main
 participant FoodTruck
+participant Sales
 participant Entrees
 participant SideDishes
 participant Vegetables
-participant Sales
 participant API
 participant TransientState
 participant OrderButton
@@ -20,54 +20,52 @@ User->DOM: Let me see a web page.
 DOM->Main: Need some HTML
 Main->FoodTruck:How about some HTML
 
-FoodTruck->Entrees:Generate entree options
-Entrees->API: Need data
-API-->Entrees: Here's data
-FoodTruck<--Entrees:Here are some radio buttons
-
-FoodTruck->SideDishes:Generate side options
-SideDishes->API: Need data
-API-->SideDishes: Here's data
-FoodTruck<--SideDishes:Here are some radio buttons
-
-FoodTruck->Vegetables:Generate veggie options
-Vegetables->API: Need data
-API-->Vegetables: Here's data
-FoodTruck<--Vegetables:Here are some radio buttons
-
 FoodTruck->Sales: Gimme sales data
 Sales->API: Gimme sales data
 API-->Sales: Sales data
 Sales-->FoodTruck: Here's HTML of the sales data
 
+FoodTruck->Entrees:Generate entree options
+Entrees->API: Gimme entree data
+API-->Entrees: Here's data
+FoodTruck<--Entrees:Here are some radio buttons
+
+FoodTruck->SideDishes:Generate side options
+SideDishes->API: Gimme sides data
+API-->SideDishes: Here's data
+FoodTruck<--SideDishes:Here are some radio buttons
+
+FoodTruck->Vegetables:Generate veggie options
+Vegetables->API: Gimme veggie data
+API-->Vegetables: Here's data
+FoodTruck<--Vegetables:Here are some radio buttons
+
+FoodTruck->OrderButton: Gimme a button
+OrderButton-->FoodTruck: Here's a button
+
 FoodTruck-->Main: Here's some HTML
 Main-->DOM: Your HTML
 DOM-->User: Here's a web page
 
-User->DOM: Here are my choices
-DOM->Main: Here are choices
-Main->FoodTruck:Here are the choices
-
-FoodTruck->Entrees: Here's an entree choice
+User->Entrees: Here's my entree choice
 Entrees->TransientState: Hold this entree.
 
-FoodTruck->SideDishes: Here's a side dish choice
+User->SideDishes: Here's my side dish choice
 SideDishes->TransientState: Hold this side dish
 
-FoodTruck->Vegetables: Here's a vegetable choice
+User->Vegetables: Here's my vegetable choice
 Vegetables->TransientState: Hold this vegetable
 
-User->DOM:I've pushed the button
-DOM->Main:Button pushed
-Main->TransientState: Button pushed
-TransientState->OrderButton: new order
+User->OrderButton:I've pushed the button
+
+
 TransientState<-OrderButton: save the order
 TransientState->API:Hold this
 TransientState->Main:refresh the display
 
 Main->FoodTruck: How about some HTML
 
-note right of FoodTruck:FoodTruck, as above, imports from Entrees, SideDishes, Vegetables, and Sales to update the display.
+note right of FoodTruck:FoodTruck, as above, imports from Entrees, SideDishes, Vegetables, OrderButton and Sales to update the display.
 
 FoodTruck-->Main: Here's some HTML
 Main->DOM:refresh the display
